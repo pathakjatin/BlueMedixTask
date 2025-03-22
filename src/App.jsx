@@ -19,7 +19,7 @@ import ProductDetails from './pages/ProductDetails';
 import UserDetails from './pages/UserDetails';
 import AddUserForm from './components/AddUserForm';
 import AddProductForm from './components/AddProductForm';
-
+import HomeIcon from '@mui/icons-material/Home';
 
 export default function App() {
   return (
@@ -37,11 +37,12 @@ function AppContent() {
   const router = useMemo(() => ({
     pathname: window.location.pathname, // Get current URL
     searchParams: new URLSearchParams(),
-    navigate: (path) => navigate(path), // Now properly updates React Router
+    navigate: (path) => navigate(path), 
   }), [navigate]);
 
   const NAVIGATION = [
     { kind: 'header', title: 'Main items' },
+    { segment:'/', title: 'Home', icon:<HomeIcon/>, onClick: () => router.navigate('/') },
     { segment: 'dashboard', title: 'Dashboard', icon: <DashboardIcon />, onClick: () => router.navigate('/dashboard') },
     { segment: 'users', title: 'Users', icon: <PeopleIcon />, onClick: () => router.navigate('/users') },
     { segment: 'products', title: 'Products', icon: <ShoppingBagIcon />, onClick: () => router.navigate('/products') },

@@ -145,7 +145,7 @@ export default function Dashboard() {
 
     </Box>
     <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
-  <Box sx={{ maxWidth: 1000 }}> {/* You can adjust maxWidth if necessary */}
+  <Box sx={{ maxWidth: 1000 }}> 
     <Typography variant="h6" gutterBottom>
       Product Categories Count
     </Typography>

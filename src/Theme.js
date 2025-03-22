@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material/styles';
 export const createAppTheme = (mode) =>
   createTheme({
     palette: {
-      mode, // Dynamically set mode ('light' or 'dark')
+      mode, 
       background: {
         default: mode === 'dark' ? '#0a0a0a' : '#ffffff',
         contrastText: mode === 'dark' ? '#fff' : '#000',

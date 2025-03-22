@@ -12,10 +12,10 @@ export function UsersProvider({ children }) {
       .catch(error => console.error("Error fetching users:", error));
   }, []);
 
-  // ✅ Function to add a new user
+
   const addUser = (user) => setUsers(prevUsers => [...prevUsers, user]);
 
-  // ✅ Function to update an existing user
+
   const updateUser = (updatedUser) => {
     setUsers(prevUsers =>
       prevUsers.map(user => (user.id === updatedUser.id ? updatedUser : user))
