@@ -14,10 +14,12 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import DescriptionIcon from '@mui/icons-material/Description';
 import HomePage from './pages/Homepage';
 import ProductDetails from './pages/ProductDetails';
 import UserDetails from './pages/UserDetails';
+import AddUserForm from './components/AddUserForm';
+import AddProductForm from './components/AddProductForm';
+
 
 export default function App() {
   return (
@@ -69,8 +71,8 @@ function AppContent() {
             <Route path="/users/:id" element={<UserDetails />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/:id" element={<ProductDetails />} />
-            <Route path="/add-user" element={<h2>Add User Page</h2>} />
-            <Route path="/add-product" element={<h2>Add Product Page</h2>} />
+            <Route path="/add-user" element={<AddUserForm />} />
+            <Route path="/add-product" element={<AddProductForm/> } />
           </Routes>
         </DashboardLayout>
       </AppProvider>

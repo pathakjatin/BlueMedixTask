@@ -1,29 +1,19 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { motion } from "framer-motion";
+import { useContext } from "react";
+import { UsersContext } from "../context/UsersContext";
 
-export default function UsersTable() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    axios.get('https://fakestoreapi.com/users')
-      .then(response => setUsers(response.data))
-      .catch(error => console.error('Error fetching users:', error));
-  }, []);
-
-  const handleDelete = (id) => {
-    setUsers(users.filter(user => user.id !== id));
-  };
+export default function Users() {
+  const { users, deleteUser } = useContext(UsersContext);
 
   return (
     <TableContainer component={Paper}>
@@ -40,23 +30,30 @@ export default function UsersTable() {
         </TableHead>
         <TableBody>
           {users.map((user) => (
-            <TableRow key={user.id}>
+            <motion.tr
+              key={user.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              viewport={{ once: true, amount: 0.2 }}
+              component={TableRow}
+            >
               <TableCell>{user.id}</TableCell>
-              {/* Wrap the name in a Link */}
               <TableCell>
-                <Link to={`/users/${user.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  {`${user.name.firstname} ${user.name.lastname}`}
+                <Link to={`/users/${user.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                  {user.name?.firstname} {user.name?.lastname}
                 </Link>
               </TableCell>
               <TableCell>{user.username}</TableCell>
               <TableCell>{user.email}</TableCell>
-              <TableCell>{user.phone}</TableCell>
+              <TableCell>{user.phone || "N/A"}</TableCell>
               <TableCell align="right">
-                <IconButton onClick={() => handleDelete(user.id)} color="error">
+                <IconButton onClick={() => deleteUser(user.id)} color="error"> 
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
-            </TableRow>
+            </motion.tr>
           ))}
         </TableBody>
       </Table>
